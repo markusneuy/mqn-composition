@@ -4,6 +4,7 @@
   "description": "Simple function composition",
   "main": "dst/index.js",
   "scripts": {
+    "start" : "node dst/index.js",
     "pretest": "babel src -d test",
     "test": "set NODE_ENV=test && mocha --recursive -R spec ./test/**/*.spec.js",
     "build": "babel src --ignore **/*.spec.js -d dst && babel src --presets es2015 --plugins transform-es2015-modules-amd --ignore **/*.spec.js -o dst/index.amd.js",
