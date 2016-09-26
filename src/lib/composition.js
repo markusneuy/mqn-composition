@@ -5,6 +5,6 @@
  * @param {...function} funcs Multiple functions
  * @returns {function} Returns the composite function
  */
-export default function composition (...funcs) {
-    return (...args) => funcs.reduce((prev, curr) => curr(prev), args);
+export default function compose (...funcs) {
+    return (...args) => funcs.reduce((prev, curr, i) => !i ? curr(...prev) : curr(prev), args);
 }

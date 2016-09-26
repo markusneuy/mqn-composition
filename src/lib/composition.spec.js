@@ -10,15 +10,15 @@ chai.use(sinonChai);
 chai.use(chaiAsPromised);
 chai.use(chaiThings);
 
-import composition from './composition';
+import compose from './composition';
 
 describe('composition', function () {
     it('should be a function', function () {
-        expect(composition).to.be.a('function');
+        expect(compose).to.be.a('function');
     });
     
     it('should return a function', function () {
-        expect(composition()).to.be.a('function');
+        expect(compose()).to.be.a('function');
     });
     
     describe('function input', function () {
@@ -28,12 +28,12 @@ describe('composition', function () {
         });
         
         it('should call add-function once if it is provided once', function () {
-            composition(add)()
+            compose(add)()
             expect(add).to.be.calledOnce;
         });
         
         it('should call add-function thrice if it is provided thrice', function () {
-            composition(add,add,add)();
+            compose(add,add,add)();
             expect(add).to.be.calledThrice;
         });
     });
