@@ -6,5 +6,8 @@
  * @returns {function} Returns the composite function
  */
 export default function compose (...funcs) {
-    return (...args) => funcs.reduce((prev, curr, i) => !i ? curr(...prev) : curr(prev), args);
+    if (!funcs.every(func => typeof func === 'function')) {
+        throw new TypeError('Arguments have to be functions.');
+    }
+    return (...args) => funcs.reverse().reduce((prev, curr, i) => !i ? curr(...prev) : curr(prev), args);
 }

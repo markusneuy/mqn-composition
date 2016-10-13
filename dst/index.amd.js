@@ -39,8 +39,21 @@ define(['exports'], function (exports) {
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = composition;
-  function composition() {
+  exports.default = compose;
+
+  function _toConsumableArray(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    } else {
+      return Array.from(arr);
+    }
+  }
+
+  function compose() {
     for (var _len = arguments.length, funcs = Array(_len), _key = 0; _key < _len; _key++) {
       funcs[_key] = arguments[_key];
     }
@@ -50,8 +63,8 @@ define(['exports'], function (exports) {
         args[_key2] = arguments[_key2];
       }
 
-      return funcs.reduce(function (prev, curr) {
-        return curr(prev);
+      return funcs.reduceRight(function (prev, curr, i) {
+        return !i ? curr.apply(undefined, _toConsumableArray(prev)) : curr(prev);
       }, args);
     };
   }

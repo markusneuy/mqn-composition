@@ -7,5 +7,9 @@
  * @returns {Function} Returns a function that combines the first function with the other ones
  */
 export default function multiComposition (func, ...funcs) {
-    return (...args) => func(...funcs.map(curr => curr(...args)));
+    if (!funcs.every(func => typeof func === 'function') ||
+            typeof func !== 'function') {
+        throw new TypeError('Arguments have to be functions.');
+    }
+    return (...args) => func(...funcs.reverse().map(curr => curr(...args)));
 }
